@@ -1,0 +1,23 @@
+@use '../../commons/styles/colors.scss';
+
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__form{
+        max-width: 400px;
+        padding:20px;
+        img{
+            width: auto;
+            height: 40px;
+        }
+        section{
+            margin-top: 13px;
+            border-radius: 15px;
+            background: colors.$dark-bg-2;
+            color:colors.$white-light;
+            padding:30px 25px;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+@use '../../commons/styles/colors.scss';
+
+.btn-google {
+	margin: 23px 0px;
+	border: 1px solid colors.$primary-color;
+}
+.row-password {
+	margin-bottom: 23px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}

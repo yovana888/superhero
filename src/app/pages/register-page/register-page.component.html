@@ -1,0 +1,27 @@
+<ng-container>
+	<h2 class="text-light">Register</h2>
+	<br />
+	<mat-form-field appearance="outline">
+		<mat-label>Full Name</mat-label>
+		<input matInput type="text" spellcheck="false" />
+		<mat-icon matSuffix>person</mat-icon>
+	</mat-form-field>
+
+	<mat-form-field appearance="outline">
+		<mat-label>E-mail</mat-label>
+		<input matInput type="text" />
+		<mat-icon matSuffix>mail</mat-icon>
+	</mat-form-field>
+
+	<mat-form-field appearance="outline">
+		<mat-label>Password</mat-label>
+		<input matInput [type]="isShowPassword ? 'text' : 'password'" />
+		<mat-icon matSuffix (click)="showPassword()">{{ isShowPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+	</mat-form-field>
+
+	<button mat-raised-button color="primary" class="button-large">Register</button>
+	<button mat-stroked-button color="primary" class="btn-google button-large">Register with Google</button>
+
+	<br />
+	<h4 class="text-light">Already account? <span class="link-purple" routerLink="/init/login"> Login</span></h4>
+</ng-container>

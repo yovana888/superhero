@@ -1,0 +1,6 @@
+@use '../../commons/styles/colors.scss';
+
+.btn-google {
+	margin: 23px 0px;
+	border: 1px solid colors.$primary-color;
+}

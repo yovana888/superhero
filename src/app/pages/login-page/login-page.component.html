@@ -1,0 +1,27 @@
+<ng-container>
+	<h2 class="text-light">Login</h2>
+	<br />
+	<mat-form-field appearance="outline">
+		<mat-label>E-mail</mat-label>
+		<input matInput type="email" />
+		<mat-icon matSuffix>mail</mat-icon>
+	</mat-form-field>
+
+	<mat-form-field appearance="outline">
+		<mat-label>Password</mat-label>
+		<input matInput [type]="isShowPassword ? 'text' : 'password'" />
+		<mat-icon matSuffix (click)="showPassword()">{{ isShowPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+	</mat-form-field>
+
+	<div class="row-password">
+		<mat-checkbox color="primary">Remember me</mat-checkbox>
+		<span color="primary" class="link-purple">Forget password?</span>
+	</div>
+
+	<button mat-raised-button color="primary" class="button-large">Login</button>
+	<button mat-stroked-button color="primary" class="btn-google button-large">Login with Google</button>
+	<br />
+	<h4 class="text-light">
+		Don't have an account? <span class="link-purple" routerLink="/init/register"> Register</span>
+	</h4>
+</ng-container>
