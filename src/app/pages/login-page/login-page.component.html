@@ -1,27 +1,32 @@
-<ng-container>
+<form autocomplete="off" [formGroup]="formGroup">
 	<h2 class="text-light">Login</h2>
 	<br />
 	<mat-form-field appearance="outline">
 		<mat-label>E-mail</mat-label>
-		<input matInput type="email" />
+		<input matInput type="email" formControlName="email" />
 		<mat-icon matSuffix>mail</mat-icon>
+		<mat-error *ngIf="formGroup.get('email')!.hasError('email')">email invalid </mat-error>
+		<mat-error *ngIf="formGroup.get('email')!.hasError('required')">email is required </mat-error>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
 		<mat-label>Password</mat-label>
-		<input matInput [type]="isShowPassword ? 'text' : 'password'" />
+		<input matInput [type]="isShowPassword ? 'text' : 'password'" formControlName="password" />
 		<mat-icon matSuffix (click)="showPassword()">{{ isShowPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+		<mat-error *ngIf="formGroup.get('password')!.hasError('required')">password is required </mat-error>
 	</mat-form-field>
 
 	<div class="row-password">
 		<mat-checkbox color="primary">Remember me</mat-checkbox>
-		<span color="primary" class="link-purple">Forget password?</span>
+		<span color="primary" class="link-purple" [routerLink]="pathForgetPassword">Forget password?</span>
 	</div>
 
-	<button mat-raised-button color="primary" class="button-large">Login</button>
-	<button mat-stroked-button color="primary" class="btn-google button-large">Login with Google</button>
+	<button mat-raised-button color="primary" class="button-large" type="submit" (click)="submitLoginEmailWithPassword()">
+		Login
+	</button>
+	<button mat-stroked-button color="primary" class="btn-google button-large" type="button">Login with Google</button>
 	<br />
 	<h4 class="text-light">
-		Don't have an account? <span class="link-purple" routerLink="/init/register"> Register</span>
+		Don't have an account? <span class="link-purple" [routerLink]="pathRegister"> Register</span>
 	</h4>
-</ng-container>
+</form>

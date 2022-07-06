@@ -1,27 +1,41 @@
-<ng-container>
+<form autocomplete="off" [formGroup]="formGroup">
 	<h2 class="text-light">Register</h2>
 	<br />
 	<mat-form-field appearance="outline">
 		<mat-label>Full Name</mat-label>
-		<input matInput type="text" spellcheck="false" />
+		<input matInput type="text" spellcheck="false" formControlName="fullName" />
 		<mat-icon matSuffix>person</mat-icon>
+		<mat-error *ngIf="formGroup.get('fullName')!.hasError('required')">fullName is required </mat-error>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
 		<mat-label>E-mail</mat-label>
-		<input matInput type="text" />
+		<input matInput type="text" formControlName="email" />
 		<mat-icon matSuffix>mail</mat-icon>
+		<mat-error *ngIf="formGroup.get('email')!.hasError('email')">email invalid </mat-error>
+		<mat-error *ngIf="formGroup.get('email')!.hasError('required')">email is required </mat-error>
 	</mat-form-field>
 
 	<mat-form-field appearance="outline">
 		<mat-label>Password</mat-label>
-		<input matInput [type]="isShowPassword ? 'text' : 'password'" />
+		<input matInput [type]="isShowPassword ? 'text' : 'password'" formControlName="password" />
 		<mat-icon matSuffix (click)="showPassword()">{{ isShowPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+		<mat-error *ngIf="formGroup.get('password')!.hasError('customPasswordValidator')">
+			The password must have an uppercase, symbol, number and greater than 8 characters
+		</mat-error>
 	</mat-form-field>
 
-	<button mat-raised-button color="primary" class="button-large">Register</button>
+	<button
+		mat-raised-button
+		color="primary"
+		class="button-large"
+		type="submit"
+		(click)="submitRegisterEmailWithPassword()"
+	>
+		Register
+	</button>
 	<button mat-stroked-button color="primary" class="btn-google button-large">Register with Google</button>
 
 	<br />
-	<h4 class="text-light">Already account? <span class="link-purple" routerLink="/init/login"> Login</span></h4>
-</ng-container>
+	<h4 class="text-light">Already account? <span class="link-purple" [routerLink]="pathLogin"> Login</span></h4>
+</form>
