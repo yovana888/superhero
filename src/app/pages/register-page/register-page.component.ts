@@ -4,7 +4,7 @@ import { customPasswordValidator } from '../../commons/validators/password-custo
 import { PATHS_AUTH_PAGES } from './../../commons/config/path-pages';
 import { AuthApiService } from '../../commons/services/api/auth/auth-api.service';
 import { NgToastService } from 'ng-angular-popup';
-import { ICreatePerfilUser } from 'src/app/commons/services/api/auth/auth-model.interface';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-register-page',
@@ -14,11 +14,17 @@ import { ICreatePerfilUser } from 'src/app/commons/services/api/auth/auth-model.
 export class RegisterPageComponent {
 	readonly pathLogin = PATHS_AUTH_PAGES.loginPage.withSlash;
 
+	showSectionConfirmation: boolean = false;
 	isShowPassword: boolean = false;
-	disableButton = false;
+	disableButton: boolean = false;
 	formGroup!: FormGroup;
 
-	constructor(private _formBuilder: FormBuilder, private _authService: AuthApiService, private _toast: NgToastService) {
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _authService: AuthApiService,
+		private _toast: NgToastService,
+		private _router: Router
+	) {
 		this._loadFormGroup();
 	}
 
@@ -35,30 +41,47 @@ export class RegisterPageComponent {
 	}
 
 	submitRegisterEmailWithPassword(): void {
-		const formDataValue = this.formGroup.value;
-		this.disableButton = true;
-		this._authService
-			.registerWithEmailPassword(formDataValue)
-			.then((res) => {
-				const dataPerfil = {
-					fullName: formDataValue.fullName,
-					photoUrl: '',
-					description: ''
-				};
-				this.createPerfil(res.user.uid, dataPerfil);
-			})
-			.catch((e) => {
-				//this._toast.error({detail:"ERROR",summary:e,sticky:true})
-				this.disableButton = false;
-				console.log(e, 'Error :v');
-			});
+		if (this.formGroup.valid) {
+			const formDataValue = this.formGroup.value;
+			this.disableButton = true;
+			this._authService
+				.registerWithEmailPassword(formDataValue)
+				.then((res) => {
+					this.setPerfilUser(formDataValue.fullName);
+				})
+				.catch((e) => {
+					this.disableButton = false;
+					const message = e.code == 'auth/email-already-in-use' ? 'Email is already registered' : e.code;
+					this._toast.error({ detail: 'Error', summary: message, duration: 5000 });
+				});
+		}
 	}
 
-	createPerfil(uid: string, dataPerfil: ICreatePerfilUser): void {
+	sendVerificationEmail(): void {}
+
+	setPerfilUser(fullName: string): void {
 		this._authService
-			.createProfileUser(uid, dataPerfil)
-			.then((res) =>
-				this._toast.error({ detail: 'ERROR', summary: 'Bienvenido ' + dataPerfil.fullName, sticky: true })
-			);
+			.getCurrentUser()
+			.then((res) => {
+				res?.updateProfile({ displayName: fullName });
+				this.formGroup.reset();
+				this._router.navigateByUrl('/gallery');
+			})
+			.catch((e) => {
+				this._toast.error({ detail: 'Error', summary: e.code, duration: 5000 });
+			})
+			.finally(() => (this.disableButton = false));
+	}
+
+	registerWithGoogle(): void {
+		this._authService
+			.googleAuth()
+			.then((res) => {
+				this._router.navigateByUrl('/gallery');
+				console.log(res, 'veamos');
+			})
+			.catch((e) => {
+				this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 });
+			});
 	}
 }

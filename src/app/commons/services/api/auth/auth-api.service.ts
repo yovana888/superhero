@@ -1,24 +1,46 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { GoogleAuthProvider, User } from 'firebase/auth';
 
-import firebase from 'firebase/compat/app';
-
-import { IRequestLogin, IRegisterUser, ICreatePerfilUser } from './auth-model.interface';
+import { IRequestLogin, IRegisterUser, IPerfilUser } from './auth-model.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
-	constructor(private _auth: AngularFireAuth, private _firestore: AngularFirestore) {}
+	userToken: any;
+	constructor(private _auth: AngularFireAuth) {
+		this._auth.authState.subscribe((user) => {
+			if (user) {
+				this.userToken = user.getIdToken();
+				localStorage.setItem('userToken', JSON.stringify(this.userToken));
+				JSON.parse(localStorage.getItem('userToken')!);
+			} else {
+				localStorage.setItem('userToken', 'null');
+				JSON.parse(localStorage.getItem('userToken')!);
+			}
+		});
+	}
 
-	loginWithEmailPassword(credentials: IRequestLogin): Promise<firebase.auth.UserCredential> {
+	// Returns true when user is looged
+	get isLoggedIn(): boolean {
+		const userToken = JSON.parse(localStorage.getItem('userToken')!);
+		return userToken !== null ? true : false;
+	}
+
+	loginWithEmailPassword(credentials: IRequestLogin) {
 		return this._auth.signInWithEmailAndPassword(credentials.email, credentials.password);
 	}
 
-	registerWithEmailPassword(formData: IRegisterUser): Promise<any> {
+	registerWithEmailPassword(formData: IRegisterUser) {
 		return this._auth.createUserWithEmailAndPassword(formData.email, formData.password);
 	}
+	/*get info user logged name, email, photo, email verified */
+	getCurrentUser() {
+		return this._auth.currentUser;
+	}
 
-	createProfileUser(idUser: string, formData: ICreatePerfilUser): Promise<any> {
-		return this._firestore.collection('users').doc(idUser).set(formData);
+	googleAuth() {
+		const provider = new GoogleAuthProvider();
+		return this._auth.signInWithPopup(provider);
 	}
 }

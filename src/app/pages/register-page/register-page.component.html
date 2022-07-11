@@ -30,11 +30,21 @@
 		color="primary"
 		class="button-large"
 		type="submit"
+		[disabled]="disableButton"
+		[class.spinner]="disableButton"
 		(click)="submitRegisterEmailWithPassword()"
 	>
 		Register
 	</button>
-	<button mat-stroked-button color="primary" class="btn-google button-large">Register with Google</button>
+	<button
+		mat-stroked-button
+		color="primary"
+		class="btn-google button-large"
+		type="button"
+		(click)="registerWithGoogle()"
+	>
+		Register with Google
+	</button>
 
 	<br />
 	<h4 class="text-light">Already account? <span class="link-purple" [routerLink]="pathLogin"> Login</span></h4>

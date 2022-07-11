@@ -21,7 +21,15 @@
 		<span color="primary" class="link-purple" [routerLink]="pathForgetPassword">Forget password?</span>
 	</div>
 
-	<button mat-raised-button color="primary" class="button-large" type="submit" (click)="submitLoginEmailWithPassword()">
+	<button
+		mat-raised-button
+		color="primary"
+		class="button-large"
+		type="submit"
+		(click)="submitLoginEmailWithPassword()"
+		[disabled]="disableButton"
+		[class.spinner]="disableButton"
+	>
 		Login
 	</button>
 	<button mat-stroked-button color="primary" class="btn-google button-large" type="button">Login with Google</button>

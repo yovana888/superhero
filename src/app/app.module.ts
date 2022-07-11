@@ -15,12 +15,15 @@ import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-pa
 import { NotfoundPageComponent } from './pages/notfound-page/notfound-page.component';
 
 import { FormSharedModule } from './modules-shared/form-shared.module';
+import { NgToastModule } from 'ng-angular-popup';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { FirebaseModule } from './modules-shared/firebase-shared.module';
 
 import { environment } from 'src/environments/environment';
+import { EmailVerifiedModalComponent } from './modals/email-verified-modal/email-verified-modal.component';
+import { HeroDetailModalComponent } from './modals/hero-detail-modal/hero-detail-modal.component';
 
 @NgModule({
 	declarations: [
@@ -30,7 +33,9 @@ import { environment } from 'src/environments/environment';
 		RegisterPageComponent,
 		ResetPasswordPageComponent,
 		NotfoundPageComponent,
-		AuthLayoutComponent
+		AuthLayoutComponent,
+		EmailVerifiedModalComponent,
+		HeroDetailModalComponent
 	],
 	imports: [
 		AngularFireModule.initializeApp(environment.firebase),
@@ -39,7 +44,8 @@ import { environment } from 'src/environments/environment';
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		FormSharedModule, // elementos basicos para form
-		HttpClientModule
+		HttpClientModule,
+		NgToastModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

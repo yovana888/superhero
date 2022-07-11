@@ -17,8 +17,7 @@ export interface IRegisterUser {
 	password: string;
 }
 
-export interface ICreatePerfilUser {
-	fullName: string;
-	photoUrl: string;
-	description: string;
+export interface IPerfilUser {
+	displayName: string;
+	photoURL: string;
 }

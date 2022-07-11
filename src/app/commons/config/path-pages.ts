@@ -3,6 +3,7 @@ const init = 'auth';
 const loginPage = 'login';
 const registerPage = 'register';
 const resetPasswordPage = 'reset';
+const gallery = 'gallery';
 
 export const PATHS_AUTH_PAGES = {
 	loginPage: {
@@ -16,6 +17,10 @@ export const PATHS_AUTH_PAGES = {
 	resetPasswordPage: {
 		withSlash: `/${init}/${resetPasswordPage}`,
 		onlyPath: resetPasswordPage
+	},
+	gallery: {
+		withSlash: `/${init}/${gallery}`,
+		onlyPath: gallery
 	}
 };
 //#endregion

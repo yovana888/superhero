@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PATHS_AUTH_PAGES } from './../../commons/config/path-pages';
 import { AuthApiService } from '../../commons/services/api/auth/auth-api.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login-page',
@@ -16,7 +17,12 @@ export class LoginPageComponent {
 	disableButton = false;
 	formGroup!: FormGroup;
 
-	constructor(private _formBuilder: FormBuilder, private _authService: AuthApiService, private _toast: NgToastService) {
+	constructor(
+		private _formBuilder: FormBuilder,
+		private _authService: AuthApiService,
+		private _toast: NgToastService,
+		private _router: Router
+	) {
 		this._loadFormGroup();
 	}
 
@@ -32,15 +38,18 @@ export class LoginPageComponent {
 	}
 
 	submitLoginEmailWithPassword(): void {
-		console.log(this.formGroup.getRawValue());
-		this._authService
-			.loginWithEmailPassword(this.formGroup.value)
-			.then((res) => {
-				console.log(res.user?.getIdToken());
-			})
-			.catch((e) => {
-				console.log(e);
-			});
-		//this.toast.error({detail:"ERROR",summary:'Your Error Message',sticky:true});
+		if (this.formGroup.valid) {
+			this.disableButton = true;
+			this._authService
+				.loginWithEmailPassword(this.formGroup.value)
+				.then((res) => {
+					console.log(res.user, 'data user login');
+					this._router.navigateByUrl('/gallery');
+				})
+				.catch((e) => {
+					this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 });
+				})
+				.finally(() => (this.disableButton = false));
+		}
 	}
 }

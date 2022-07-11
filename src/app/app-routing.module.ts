@@ -7,6 +7,9 @@ import { LoginPageComponent } from '../app/pages/login-page/login-page.component
 import { RegisterPageComponent } from '../app/pages/register-page/register-page.component';
 import { ResetPasswordPageComponent } from '../app/pages/reset-password-page/reset-password-page.component';
 import { NotfoundPageComponent } from '../app/pages/notfound-page/notfound-page.component';
+import { GalleryLayoutComponent } from './layouts/gallery-layout/gallery-layout.component';
+/*guards */
+import { AuthGuard } from './commons/guards/auth.guard';
 
 const routes: Routes = [
 	{
@@ -22,6 +25,11 @@ const routes: Routes = [
 			{ path: 'register', component: RegisterPageComponent },
 			{ path: 'reset', component: ResetPasswordPageComponent }
 		]
+	},
+	{
+		path: 'gallery',
+		component: GalleryLayoutComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: '**',
