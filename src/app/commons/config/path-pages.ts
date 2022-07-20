@@ -1,29 +1,42 @@
 //#region  PATH AUTH
-const init = 'auth';
 const loginPage = 'login';
 const registerPage = 'register';
 const resetPasswordPage = 'reset';
-const gallery = 'gallery';
+const galleryPage = 'gallery';
+const superHerosPage = 'superheros';
+const comicsPage = 'comics';
 
 export const PATHS_AUTH_PAGES = {
 	loginPage: {
-		withSlash: `/${init}/${loginPage}`,
+		withSlash: `/${loginPage}`,
 		onlyPath: loginPage
 	},
 	registerPage: {
-		withSlash: `/${init}/${registerPage}`,
+		withSlash: `/${registerPage}`,
 		onlyPath: registerPage
 	},
 	resetPasswordPage: {
-		withSlash: `/${init}/${resetPasswordPage}`,
+		withSlash: `/${resetPasswordPage}`,
 		onlyPath: resetPasswordPage
-	},
-	gallery: {
-		withSlash: `/${init}/${gallery}`,
-		onlyPath: gallery
 	}
 };
 //#endregion
+
+//#region HOME
+
+export const PATHS_HOME_PAGES = {
+	withSlash: `/${galleryPage}`,
+	onlyPath: galleryPage,
+
+	superhero: {
+		withSlash: `/${galleryPage}/${superHerosPage}`,
+		onlyPath: superHerosPage
+	},
+	comics: {
+		withSlash: `/${galleryPage}/${comicsPage}`,
+		onlyPath: comicsPage
+	}
+};
 
 //#region NOT FOUND
 export const PATH_NOT_FOUND_PAGE = {

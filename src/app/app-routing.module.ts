@@ -1,35 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-/*Layouts */
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-/*Pages */
-import { LoginPageComponent } from '../app/pages/login-page/login-page.component';
-import { RegisterPageComponent } from '../app/pages/register-page/register-page.component';
-import { ResetPasswordPageComponent } from '../app/pages/reset-password-page/reset-password-page.component';
 import { NotfoundPageComponent } from '../app/pages/notfound-page/notfound-page.component';
-import { GalleryLayoutComponent } from './layouts/gallery-layout/gallery-layout.component';
+
 /*guards */
 import { AuthGuard } from './commons/guards/auth.guard';
+import { PATHS_AUTH_PAGES, PATH_NOT_FOUND_PAGE, PATHS_HOME_PAGES } from './commons/config/path-pages';
 
 const routes: Routes = [
 	{
-		path: '',
-		redirectTo: 'auth/login',
-		pathMatch: 'full'
+		path: PATHS_AUTH_PAGES.loginPage.onlyPath,
+		loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule)
 	},
 	{
-		path: 'auth',
-		component: AuthLayoutComponent,
-		children: [
-			{ path: 'login', component: LoginPageComponent },
-			{ path: 'register', component: RegisterPageComponent },
-			{ path: 'reset', component: ResetPasswordPageComponent }
-		]
-	},
-	{
-		path: 'gallery',
-		component: GalleryLayoutComponent,
+		path: PATHS_HOME_PAGES.onlyPath,
+		loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule),
 		canActivate: [AuthGuard]
+	},
+	{
+		path: '',
+		redirectTo: PATHS_HOME_PAGES.onlyPath
+	},
+	{
+		path: PATH_NOT_FOUND_PAGE['not-found'].onlyPath,
+		component: NotfoundPageComponent
 	},
 	{
 		path: '**',

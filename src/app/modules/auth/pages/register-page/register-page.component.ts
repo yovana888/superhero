@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { customPasswordValidator } from '../../commons/validators/password-custom.validators';
-import { PATHS_AUTH_PAGES } from './../../commons/config/path-pages';
-import { AuthApiService } from '../../commons/services/api/auth/auth-api.service';
+import { customPasswordValidator } from '../../../../commons/validators/password-custom.validators';
+import { PATHS_AUTH_PAGES } from '../../../../commons/config/path-pages';
+import { AuthApiService } from '../../../../commons/services/api/auth/auth-api.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { EmailVerifiedModalComponent } from '../../modals/email-verified-modal/email-verified-modal.component';
 
 @Component({
 	selector: 'app-register-page',
@@ -23,7 +25,8 @@ export class RegisterPageComponent {
 		private _formBuilder: FormBuilder,
 		private _authService: AuthApiService,
 		private _toast: NgToastService,
-		private _router: Router
+		private _router: Router,
+		private _matDialog: MatDialog
 	) {
 		this._loadFormGroup();
 	}
@@ -57,31 +60,32 @@ export class RegisterPageComponent {
 		}
 	}
 
-	sendVerificationEmail(): void {}
+	openDialogVerificationEmail(): void {
+		this._matDialog.open(EmailVerifiedModalComponent, {
+			width: '450px',
+			data: {
+				message: `We have sent email to ${this.formGroup.value.email} to confirm the validity of our email adress. Don't forget to check your spam`,
+				type: 'register'
+			}
+		});
+	}
 
 	setPerfilUser(fullName: string): void {
 		this._authService
 			.getCurrentUser()
 			.then((res) => {
 				res?.updateProfile({ displayName: fullName });
-				this.formGroup.reset();
-				this._router.navigateByUrl('/gallery');
+				res?.sendEmailVerification();
 			})
-			.catch((e) => {
-				this._toast.error({ detail: 'Error', summary: e.code, duration: 5000 });
-			})
+			.then(() => this.openDialogVerificationEmail())
+			.catch((e) => this._toast.error({ detail: 'Error', summary: e.code, duration: 5000 }))
 			.finally(() => (this.disableButton = false));
 	}
 
 	registerWithGoogle(): void {
 		this._authService
 			.googleAuth()
-			.then((res) => {
-				this._router.navigateByUrl('/gallery');
-				console.log(res, 'veamos');
-			})
-			.catch((e) => {
-				this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 });
-			});
+			.then((res) => this._router.navigateByUrl('/gallery'))
+			.catch((e) => this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 }));
 	}
 }

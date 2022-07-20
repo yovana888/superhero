@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PATHS_AUTH_PAGES } from './../../commons/config/path-pages';
-import { AuthApiService } from '../../commons/services/api/auth/auth-api.service';
+import { PATHS_AUTH_PAGES } from '../../../../commons/config/path-pages';
+import { AuthApiService } from '../../../../commons/services/api/auth/auth-api.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 
@@ -43,8 +43,8 @@ export class LoginPageComponent {
 			this._authService
 				.loginWithEmailPassword(this.formGroup.value)
 				.then((res) => {
-					console.log(res.user, 'data user login');
 					this._router.navigateByUrl('/gallery');
+					console.log(res.user, 'data user login');
 				})
 				.catch((e) => {
 					this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 });

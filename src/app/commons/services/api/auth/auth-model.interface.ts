@@ -21,3 +21,8 @@ export interface IPerfilUser {
 	displayName: string;
 	photoURL: string;
 }
+
+export interface IDataModalVerifyEmail {
+	message: string;
+	type: string;
+}

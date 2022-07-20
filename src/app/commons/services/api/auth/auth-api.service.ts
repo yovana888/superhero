@@ -7,24 +7,22 @@ import { IRequestLogin, IRegisterUser, IPerfilUser } from './auth-model.interfac
 
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
-	userToken: any;
+	userHero: any;
 	constructor(private _auth: AngularFireAuth) {
 		this._auth.authState.subscribe((user) => {
 			if (user) {
-				this.userToken = user.getIdToken();
-				localStorage.setItem('userToken', JSON.stringify(this.userToken));
-				JSON.parse(localStorage.getItem('userToken')!);
+				this.userHero = user;
+				localStorage.setItem('userHero', JSON.stringify(this.userHero));
 			} else {
-				localStorage.setItem('userToken', 'null');
-				JSON.parse(localStorage.getItem('userToken')!);
+				localStorage.setItem('userHero', 'null');
 			}
 		});
 	}
 
 	// Returns true when user is looged
 	get isLoggedIn(): boolean {
-		const userToken = JSON.parse(localStorage.getItem('userToken')!);
-		return userToken !== null ? true : false;
+		const userHero = JSON.parse(localStorage.getItem('userHero')!);
+		return userHero !== null ? true : false;
 	}
 
 	loginWithEmailPassword(credentials: IRequestLogin) {
