@@ -44,8 +44,6 @@ export class ResetPasswordPageComponent {
 	validEmail(): void {
 		if (this.formGroupEmail.valid) {
 			this.showFormNewPassword = true;
-		} else {
-			alert('erros :v');
 		}
 	}
 

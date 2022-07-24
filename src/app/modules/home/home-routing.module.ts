@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { GalleryLayoutComponent } from 'src/app/layouts/gallery-layout/gallery-layout.component';
-import { SuperheroPageComponent } from './pages/superhero-page/superhero-page.component';
-import { ComicsPageComponent } from './pages/comics-page/comics-page.component';
 
 import { PATHS_HOME_PAGES } from './../../commons/config/path-pages';
+import { AuthGuard } from 'src/app/commons/guards/auth.guard';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: GalleryLayoutComponent,
+		canActivate: [AuthGuard],
 		children: [
 			{
-				path: PATHS_HOME_PAGES.superhero.onlyPath,
-				component: SuperheroPageComponent
+				path: '',
+				redirectTo: PATHS_HOME_PAGES.superhero.onlyPath,
+				pathMatch: 'full'
 			},
 			{
 				path: PATHS_HOME_PAGES.comics.onlyPath,
-				component: ComicsPageComponent
+				loadChildren: () => import('./pages/comics-page/comics-page.module').then((m) => m.ComicsPageModule)
 			},
 			{
-				path: '',
-				redirectTo: PATHS_HOME_PAGES.onlyPath
+				path: PATHS_HOME_PAGES.superhero.onlyPath,
+				loadChildren: () => import('./pages/superhero-page/superhero-page.module').then((m) => m.SuperHeroPageModule)
 			}
 		]
 	}

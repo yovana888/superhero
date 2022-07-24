@@ -41,4 +41,8 @@ export class AuthApiService {
 		const provider = new GoogleAuthProvider();
 		return this._auth.signInWithPopup(provider);
 	}
+
+	signOut() {
+		return this._auth.signOut();
+	}
 }

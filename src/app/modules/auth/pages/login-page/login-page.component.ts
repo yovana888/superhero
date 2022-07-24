@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PATHS_AUTH_PAGES } from '../../../../commons/config/path-pages';
+import { PATHS_AUTH_PAGES, PATHS_HOME_PAGES } from '../../../../commons/config/path-pages';
 import { AuthApiService } from '../../../../commons/services/api/auth/auth-api.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginPageComponent {
 	readonly pathRegister = PATHS_AUTH_PAGES.registerPage.withSlash;
 	readonly pathForgetPassword = PATHS_AUTH_PAGES.resetPasswordPage.withSlash;
+	readonly pathHome = PATHS_HOME_PAGES.withSlash;
 	isShowPassword: boolean = false;
 	disableButton = false;
 	formGroup!: FormGroup;
@@ -43,7 +44,7 @@ export class LoginPageComponent {
 			this._authService
 				.loginWithEmailPassword(this.formGroup.value)
 				.then((res) => {
-					this._router.navigateByUrl('/gallery');
+					this._router.navigateByUrl(this.pathHome);
 					console.log(res.user, 'data user login');
 				})
 				.catch((e) => {

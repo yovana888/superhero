@@ -4,11 +4,11 @@ import { NotfoundPageComponent } from '../app/pages/notfound-page/notfound-page.
 
 /*guards */
 import { AuthGuard } from './commons/guards/auth.guard';
-import { PATHS_AUTH_PAGES, PATH_NOT_FOUND_PAGE, PATHS_HOME_PAGES } from './commons/config/path-pages';
+import { PATHS_AUTH_PAGES, PATHS_HOME_PAGES } from './commons/config/path-pages';
 
 const routes: Routes = [
 	{
-		path: PATHS_AUTH_PAGES.loginPage.onlyPath,
+		path: PATHS_AUTH_PAGES.onlyPath,
 		loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule)
 	},
 	{
@@ -18,11 +18,8 @@ const routes: Routes = [
 	},
 	{
 		path: '',
-		redirectTo: PATHS_HOME_PAGES.onlyPath
-	},
-	{
-		path: PATH_NOT_FOUND_PAGE['not-found'].onlyPath,
-		component: NotfoundPageComponent
+		redirectTo: PATHS_HOME_PAGES.onlyPath,
+		pathMatch: 'full'
 	},
 	{
 		path: '**',

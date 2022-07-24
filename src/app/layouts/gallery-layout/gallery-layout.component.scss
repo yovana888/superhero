@@ -1,3 +1,56 @@
-.text-white{
-    color:#fff;
+@use '../../commons/styles/colors.scss';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	&__sidenav{
+		flex: 1;
+	}
+
+	&__sidenav__content {
+		display: flex;
+		height: 100%;
+		background: colors.$dark-bg;
+		padding: 25px 30px;
+	}
+	
+}
+
+.mat-list-base{
+	:nth-child(1) {
+		color: colors.$white-light;
+	}
+	:nth-child(3) {
+		color: colors.$primary-color;
+	}
+	:nth-child(4) {
+		color: colors.$cian-color;
+	}
+	:nth-child(5) {
+		color: colors.$secondary-color;
+	}
+	:nth-child(6) {
+		color: colors.$pink-color;
+	}
+}
+
+.mat-list-base .active{
+	border-left: 5px solid colors.$primary-color;
+}
+
+.mat-drawer {
+	background:colors.$dark-color;
+}
+
+
+.fill-remaining-space {
+	/* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+	flex: 1 1 auto;
 }
