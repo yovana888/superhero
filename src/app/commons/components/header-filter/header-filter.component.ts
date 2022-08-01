@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderFilterComponent implements OnInit {
 	constructor() {}
-
+	searchByHero: boolean = true;
+	valueSearch: string = '';
 	// eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
 	ngOnInit(): void {}
+
+	changeSearch(): void {
+		this.searchByHero = !this.searchByHero;
+		this.valueSearch = '';
+	}
 }

@@ -20,6 +20,14 @@
 			</mat-nav-list>
 		</mat-sidenav>
 
-		<div class="container__sidenav__content"><router-outlet></router-outlet></div>
+		<div class="container__sidenav__content">
+			<section>
+				<router-outlet></router-outlet>
+			</section>
+			<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true"
+				><img src="assets/images/spinner.svg" />
+				<p [style.color]="'white'">Loading...</p></ngx-spinner
+			>
+		</div>
 	</mat-sidenav-container>
 </div>

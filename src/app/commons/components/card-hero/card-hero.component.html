@@ -1,1 +1,4 @@
-<p>card-hero works!</p>
+<div class="card" *ngIf="hero">
+	<img [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" alt="img_hero" />
+	<p>{{ hero.name }}</p>
+</div>

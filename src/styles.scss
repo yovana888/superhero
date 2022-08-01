@@ -46,8 +46,10 @@ $appAngular-theme: mat.define-dark-theme((
   font-weight: 400;
   color: colors.$white-light;
 }
-body { margin: 0; font-family: 'Mulish', sans-serif; background: colors.$dark-bg}
-
+body { margin: 0; font-family: 'Mulish', sans-serif; background: colors.$dark-bg;}
+.mat-drawer-container{
+  background: colors.$dark-bg;
+}
 
 /*
 Estilos para cambiar al mat-input
@@ -125,4 +127,21 @@ select:focus {
 .mat-form-field-subscript-wrapper{
   position: relative !important;
 }
+
+//Scroll 
+
+::-webkit-scrollbar-thumb
+{
+    background: rgb(94, 94, 94) !important;
+    opacity: 0.3;
+    border-radius: 4px;
+}
+::-webkit-scrollbar {
+    height: 4px;
+    width: 5px;
+  }
+  
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.26) !important;
+  }
 

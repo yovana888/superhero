@@ -1,0 +1,27 @@
+@use '../../styles/colors.scss';
+.card{
+    background: colors.$dark-bg-3;
+    border-radius: 13px;
+    max-width: 210px;
+    min-width: 180px;
+    height: auto;
+    padding: 20px;
+    color: colors.$white-color;
+    text-align: center;
+    cursor: pointer;
+    &:hover{
+        background: colors.$dark-color;
+    }
+    img{
+        border-radius: 13px;
+        height: 180px;
+        width: 170px;
+    }
+    p{
+        font-weight: 400;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+}

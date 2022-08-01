@@ -1,2 +1,16 @@
-<p>superhero-page works!</p>
 <app-header-filter></app-header-filter>
+
+<div class="container_cards">
+	<app-card-hero *ngFor="let item of listCharacters" [hero]="item"></app-card-hero>
+</div>
+<app-loader></app-loader>
+<div class="container_pagination">
+	<mat-paginator
+		#paginator
+		[length]="pageLength"
+		[pageSize]="pageSize"
+		[pageSizeOptions]="[5, 10, 20]"
+		(page)="pageEvent = $event; onChangePaginate($event)"
+	>
+	</mat-paginator>
+</div>
