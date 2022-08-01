@@ -5,12 +5,12 @@ import { HeaderFilterComponent } from 'src/app/commons/components/header-filter/
 import { SuperheroPageComponent } from './superhero-page.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormSharedModule } from '../../../../modules-shared/form-shared.module';
-import { LoaderComponent } from 'src/app/commons/components/loader/loader.component';
+import { HeroDetailModalModule } from '../../modals/hero-detail-modal/hero-detail-modal.module';
 
 export const routes: Routes = [{ path: '', component: SuperheroPageComponent }];
 
 @NgModule({
-	declarations: [SuperheroPageComponent, HeaderFilterComponent, CardHeroComponent, LoaderComponent],
-	imports: [RouterModule.forChild(routes), FormSharedModule, MatPaginatorModule]
+	declarations: [SuperheroPageComponent, HeaderFilterComponent, CardHeroComponent],
+	imports: [RouterModule.forChild(routes), FormSharedModule, MatPaginatorModule, HeroDetailModalModule]
 })
 export class SuperHeroPageModule {}

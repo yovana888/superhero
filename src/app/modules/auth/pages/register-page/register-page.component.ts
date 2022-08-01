@@ -63,6 +63,7 @@ export class RegisterPageComponent {
 	openDialogVerificationEmail(): void {
 		this._matDialog.open(EmailVerifiedModalComponent, {
 			width: '450px',
+			disableClose: true,
 			data: {
 				message: `We have sent email to ${this.formGroup.value.email} to confirm the validity of our email adress. Don't forget to check your spam`,
 				type: 'register'
@@ -85,7 +86,7 @@ export class RegisterPageComponent {
 	registerWithGoogle(): void {
 		this._authService
 			.googleAuth()
-			.then((res) => this._router.navigateByUrl('/gallery'))
+			.then((res) => this._router.navigateByUrl('/home'))
 			.catch((e) => this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 }));
 	}
 }

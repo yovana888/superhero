@@ -1,0 +1,65 @@
+@use '../../../../commons/styles/colors.scss';
+section{
+    display:flex;
+    flex-direction: column;
+    .container_img{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap:12px;
+        :nth-child(1){
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 10px solid #333;
+        }
+        :nth-child(2){
+            font-weight: 500;
+            font-size: 18px;
+        }
+    }
+    .container_more_info{
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: space-around;
+        align-items: center;
+        p{
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            color:colors.$gray-color;
+        }
+
+    }
+
+    .container_description{
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #333;
+        color: colors.$white-light;
+        margin-top: 20px;
+        font-size: 14px;
+        text-align: center;
+    }
+}
+
+.mat-expansion-panel{
+    background-color: #333;
+   p{
+    margin-bottom: 12px;
+    color: colors.$white-light;
+    font-size: 15px;
+   }
+}
+
+.mat-expansion-panel-header-title{
+    color:#794efb;
+}
+
+.mat-icon{
+    font-size: 15px;
+    height: 14px;
+}

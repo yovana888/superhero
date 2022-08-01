@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,9 +13,8 @@ import { FirebaseModule } from './modules-shared/firebase-shared.module';
 
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
-import { InterceptorService } from './commons/services/spinner/interceptor.service';
-import { LoaderInterceptor } from './commons/services/spinner/interceptor2.service';
-import { LoaderService } from './commons/services/spinner/spinner2.service';
+import { LoaderInterceptor } from './commons/services/spinner/interceptor.service';
+import { LoaderService } from './commons/services/spinner/spinner.service';
 
 @NgModule({
 	declarations: [AppComponent],

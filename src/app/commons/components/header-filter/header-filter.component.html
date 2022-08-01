@@ -1,14 +1,14 @@
 <section>
-	<img src="assets/images/logo.svg" alt="logo" />
+	<img src="assets/images/logo.svg" alt="logo" id="logo" />
 	<mat-form-field appearance="outline">
 		<mat-label>Search</mat-label>
-		<input matInput type="text" autocomplete="off" [(ngModel)]="valueSearch" />
-		<button *ngIf="valueSearch" matSuffix mat-icon-button aria-label="Clear" (click)="valueSearch = ''">
+		<input matInput type="text" autocomplete="off" [formControl]="valueSearch" />
+		<button *ngIf="valueSearch.value" matSuffix mat-icon-button aria-label="Clear" (click)="cleanSearch()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
-	<div class="check_filter__row">
-		<mat-checkbox color="primary" [checked]="searchByHero" (change)="changeSearch()">Search by Hero</mat-checkbox>
-		<mat-checkbox color="primary" [checked]="!searchByHero" (change)="changeSearch()">Search by Comic</mat-checkbox>
+	<div class="account__container">
+		<img [src]="!photoUser ? 'assets/images/img-user.svg' : photoUser" alt="img" [class.circle]="photoUser" />
+		<p>{{ nameUser }}</p>
 	</div>
 </section>

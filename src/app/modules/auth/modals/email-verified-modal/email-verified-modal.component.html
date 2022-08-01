@@ -1,7 +1,9 @@
 <div mat-dialog-content>
 	<img src="assets/images/email.svg" alt="img-email" />
-</div>
-<div mat-dialog-actions>
-	<div mat-raised-button color="primary" type="button" (click)="clickNo()" [mat-dialog-close]="true">No</div>
-	<div mat-raised-button color="accent" type="button" (click)="clickSi()">Si</div>
+	<div class="message_container">
+		<p>{{ data.message }}</p>
+	</div>
+	<div class="actions_container">
+		<button mat-raised-button color="primary" (click)="goHome()">Ok</button>
+	</div>
 </div>

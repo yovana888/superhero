@@ -1,9 +1,18 @@
-<app-header-filter></app-header-filter>
+<app-header-filter (search)="onSearch($event)" (reload)="onReload()"></app-header-filter>
 
 <div class="container_cards">
-	<app-card-hero *ngFor="let item of listCharacters" [hero]="item"></app-card-hero>
+	<app-card-hero
+		*ngFor="let item of listCharacters"
+		[hero]="item"
+		(clickCardHero)="openDialogHeroDetail($event)"
+	></app-card-hero>
 </div>
-<app-loader></app-loader>
+
+<div class="container_notFound" *ngIf="showNotFoundResult">
+	<img src="assets/images/no-results.png" alt="not-found" />
+	<p>No results found</p>
+</div>
+
 <div class="container_pagination">
 	<mat-paginator
 		#paginator
@@ -11,6 +20,7 @@
 		[pageSize]="pageSize"
 		[pageSizeOptions]="[5, 10, 20]"
 		(page)="pageEvent = $event; onChangePaginate($event)"
+		[class.hide]="!listCharacters.length"
 	>
 	</mat-paginator>
 </div>

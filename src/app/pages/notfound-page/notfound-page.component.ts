@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-notfound-page',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./notfound-page.component.scss']
 })
 export class NotfoundPageComponent implements OnInit {
-	constructor() {}
+	constructor(private _router: Router) {}
 
 	// eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
 	ngOnInit(): void {}
+
+	goBack(): void {
+		this._router.navigateByUrl('/home');
+	}
 }

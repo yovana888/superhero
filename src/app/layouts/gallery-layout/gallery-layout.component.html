@@ -24,10 +24,7 @@
 			<section>
 				<router-outlet></router-outlet>
 			</section>
-			<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true"
-				><img src="assets/images/spinner.svg" />
-				<p [style.color]="'white'">Loading...</p></ngx-spinner
-			>
+			<app-loader></app-loader>
 		</div>
 	</mat-sidenav-container>
 </div>

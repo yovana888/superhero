@@ -21,13 +21,23 @@ export class SuperHeroApiService {
 		this.apiKey = environment.apiKey;
 	}
 
-	getAllHeros(limit: number = 10, pageIndex: number = 0): Observable<RequestMarvelHeroI> {
-		return this._httpClient.get<RequestMarvelHeroI>(this.apiUrl, {
-			params: new HttpParams()
-				.set('limit', limit)
-				.set('offset', limit * pageIndex)
-				.set('apikey', this.apiKey)
-		});
+	getAllHeros(limit: number = 10, pageIndex: number = 0, nameStartsWith: string = ''): Observable<RequestMarvelHeroI> {
+		const objParams =
+			nameStartsWith === ''
+				? {
+						params: new HttpParams()
+							.set('limit', limit)
+							.set('offset', limit * pageIndex)
+							.set('apikey', this.apiKey)
+				  }
+				: {
+						params: new HttpParams()
+							.set('limit', limit)
+							.set('offset', limit * pageIndex)
+							.set('nameStartsWith', nameStartsWith)
+							.set('apikey', this.apiKey)
+				  };
+		return this._httpClient.get<RequestMarvelHeroI>(this.apiUrl, objParams);
 	}
 
 	getHerobyID(id: number): Observable<RequestMarvelHeroI> {

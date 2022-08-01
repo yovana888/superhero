@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 import { PATHS_AUTH_PAGES } from 'src/app/commons/config/path-pages';
 import { customPasswordValidator } from 'src/app/commons/validators/password-custom.validators';
 import { customRepeatPasswordMatch, PasswordStateMatcher } from 'src/app/commons/validators/repeat-password.validators';
@@ -19,7 +20,7 @@ export class ResetPasswordPageComponent {
 	formGroupEmail!: FormGroup;
 	formGroupNewPassword!: FormGroup;
 
-	constructor(private _formBuilder: FormBuilder) {
+	constructor(private _formBuilder: FormBuilder, private _toast: NgToastService) {
 		this._loadFormGroup();
 	}
 
@@ -43,15 +44,14 @@ export class ResetPasswordPageComponent {
 
 	validEmail(): void {
 		if (this.formGroupEmail.valid) {
-			this.showFormNewPassword = true;
+			//this.showFormNewPassword = true;
+			this._toast.info({ detail: 'Info', summary: 'Soon to implement', duration: 6000 });
 		}
 	}
 
 	resetPassword(): void {
 		if (this.formGroupNewPassword.valid) {
-			console.log('bien');
-		} else {
-			alert('corrija pz');
+			console.log('reset');
 		}
 	}
 }

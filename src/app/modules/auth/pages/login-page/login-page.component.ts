@@ -53,4 +53,11 @@ export class LoginPageComponent {
 				.finally(() => (this.disableButton = false));
 		}
 	}
+
+	loginWithGoogle(): void {
+		this._authService
+			.googleAuth()
+			.then((res) => this._router.navigateByUrl('/home'))
+			.catch((e) => this._toast.error({ detail: 'Error', summary: e.code, duration: 6000 }));
+	}
 }

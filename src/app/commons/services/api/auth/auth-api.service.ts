@@ -37,6 +37,10 @@ export class AuthApiService {
 		return this._auth.currentUser;
 	}
 
+	getInfoUser() {
+		return this._auth.authState;
+	}
+
 	googleAuth() {
 		const provider = new GoogleAuthProvider();
 		return this._auth.signInWithPopup(provider);

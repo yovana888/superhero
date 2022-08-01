@@ -32,7 +32,9 @@
 	>
 		Login
 	</button>
-	<button mat-stroked-button color="primary" class="btn-google button-large" type="button">Login with Google</button>
+	<button mat-stroked-button color="primary" class="btn-google button-large" type="button" (click)="loginWithGoogle()">
+		Login with Google
+	</button>
 	<br />
 	<h4 class="text-light">
 		Don't have an account? <span class="link-purple" [routerLink]="pathRegister"> Register</span>

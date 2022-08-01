@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SuperHeroI } from '../../services/api/home/superhero/superhero-model.interface';
 
 @Component({
@@ -8,8 +8,13 @@ import { SuperHeroI } from '../../services/api/home/superhero/superhero-model.in
 })
 export class CardHeroComponent implements OnInit {
 	@Input() hero?: SuperHeroI;
+	@Output() clickCardHero = new EventEmitter<SuperHeroI>();
 	constructor() {}
 
 	// eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
 	ngOnInit(): void {}
+
+	clickCard(hero: SuperHeroI): void {
+		this.clickCardHero.emit(hero);
+	}
 }

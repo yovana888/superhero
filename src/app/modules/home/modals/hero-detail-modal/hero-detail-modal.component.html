@@ -1,1 +1,36 @@
-<p>hero-detail-modal works!</p>
+<section>
+	<button mat-mini-fab color="primary" (click)="closeDialog()">
+		<mat-icon>arrow_back</mat-icon>
+	</button>
+	<div class="container_img">
+		<img [src]="urlImage" alt="" />
+		<p>{{ data?.name }}</p>
+	</div>
+	<div class="container_more_info" *ngIf="linksInfo.length === 3">
+		<p (click)="openLink(linksInfo[0].url)"><mat-icon>open_in_new</mat-icon> Details</p>
+		<p (click)="openLink(linksInfo[1].url)"><mat-icon>language</mat-icon>Wiki</p>
+		<p (click)="openLink(linksInfo[2].url)"><mat-icon>sticky_note_2</mat-icon>Comic</p>
+	</div>
+	<div class="container_description" *ngIf="data?.description">
+		<p>
+			{{ data?.description }}
+		</p>
+	</div>
+	<br />
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title> Comics </mat-panel-title>
+			</mat-expansion-panel-header>
+			<p *ngFor="let comic of dataComics"><mat-icon>book</mat-icon> {{ comic.name }}</p>
+			<p *ngIf="!dataComics">No results found <mat-icon>search_off</mat-icon></p>
+		</mat-expansion-panel>
+		<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+			<mat-expansion-panel-header>
+				<mat-panel-title> Stories </mat-panel-title>
+			</mat-expansion-panel-header>
+			<p *ngFor="let storie of dataStories"><mat-icon>local_library</mat-icon> {{ storie.name }}</p>
+			<p *ngIf="!dataStories">No results found <mat-icon>search_off</mat-icon></p>
+		</mat-expansion-panel>
+	</mat-accordion>
+</section>

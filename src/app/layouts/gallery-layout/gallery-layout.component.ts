@@ -23,7 +23,6 @@ export class GalleryLayoutComponent implements OnInit {
 	objMenu = [
 		{ title: 'SuperHeros', active: true, icon: 'settings_accessibility', link: this.superHeroPath },
 		{ title: 'Comics', active: false, icon: 'menu_book', link: this.comicsPath },
-		{ title: 'My account', active: false, icon: 'account_circle', link: '' },
 		{ title: 'Logout', active: false, icon: 'logout', link: '' }
 	];
 
@@ -34,8 +33,15 @@ export class GalleryLayoutComponent implements OnInit {
 		itemMenuActual.active = true;
 		this.indexPrevious = index;
 
-		if (itemMenuActual.link !== '') {
-			this._router.navigateByUrl(itemMenuActual.link);
+		switch (itemMenuActual.link) {
+			case '':
+				this.logout();
+				break;
+			case this.comicsPath:
+				this._toast.info({ detail: 'Info', summary: 'Soon to implement', duration: 5000 });
+				break;
+			default:
+				this._router.navigateByUrl(itemMenuActual.link);
 		}
 	}
 

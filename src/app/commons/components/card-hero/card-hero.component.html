@@ -1,4 +1,4 @@
-<div class="card" *ngIf="hero">
+<div class="card" *ngIf="hero" (click)="clickCard(hero)">
 	<img [src]="hero.thumbnail.path + '.' + hero.thumbnail.extension" alt="img_hero" />
 	<p>{{ hero.name }}</p>
 </div>
